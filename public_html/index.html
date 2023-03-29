@@ -102,27 +102,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     const pellet = pellets[i];
                     ctx.beginPath();
                     ctx.arc(pellet.x, pellet.y, pelletSize, 0, Math.PI * 2);
-                        ctx.fillStyle = 'brown';
-                        ctx.fill();
+                    ctx.fillStyle = 'brown';
+                    ctx.fill();
+                }
+            }
+
+            // update the pellets
+            function updatePellets() {
+                for (let i = 0; i < pellets.length; i++) {
+                    const pellet = pellets[i];
+                    pellet.dx = Math.cos(angle * ((i + 1) * Math.PI * 2 / (3))) * pelletSpeed;
+                    pellet.dy = Math.sin(angle * ((i + 1) * Math.PI * 2 / (3))) * pelletSpeed;
+                    pellet.x += pellet.dx;
+                    pellet.y += pellet.dy;
+
+                    // check if pellet is off screen and reset its position
+                    if (pellet.x < 0 || pellet.x > canvas.width || pellet.y < 0 || pellet.y > canvas.height) {
+                        pellet.x = vertices[i].x;
+                        pellet.y = vertices[i].y;
                     }
                 }
-
-                // update the pellets
-                function updatePellets() {
-                    for (let i = 0; i < pellets.length; i++) {
-                        const pellet = pellets[i];
-                        pellet.dx = Math.cos(angle*((i+1)*Math.PI*2/(3))) * pelletSpeed;
-                        pellet.dy = Math.sin(angle*((i+1)*Math.PI*2/(3))) * pelletSpeed;
-                        pellet.x += pellet.dx;
-                        pellet.y += pellet.dy;
-
-                        // check if pellet is off screen and reset its position
-                        if (pellet.x < 0 || pellet.x > canvas.width || pellet.y < 0 || pellet.y > canvas.height) {
-                            pellet.x = vertices[i].x;
-                            pellet.y = vertices[i].y;
-                        }
-                    }
-                }
+            }
 
 
 
