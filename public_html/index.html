@@ -12,14 +12,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 padding: 0;
             }
             canvas {
-                display: block;
+                display: flow-root;
                 margin: auto;
-                border: 1px solid black;
+                width: 87vw;
+                height: 79vh;
+                border: 2px solid black;
+                z-index: -1;
             }
         </style>
     </head>
     <body>
-        <canvas id="canvas" width="480" height="480"></canvas>
+        <canvas id="canvas"></canvas>
         <script>
             // get the canvas and 2D rendering context
             const canvas = document.getElementById('canvas');
@@ -94,7 +97,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             ];
 
             const pelletSize = 4;
-            const pelletSpeed = -15;
+            const pelletSpeed = -12.48;
 
             // draw the pellets
             function drawPellets() {
@@ -113,8 +116,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     const pellet = pellets[i];
                     pellet.dx = Math.cos(angle * ((i + 1) * Math.PI * 2 / (3))) * pelletSpeed;
                     pellet.dy = Math.sin(angle * ((i + 1) * Math.PI * 2 / (3))) * pelletSpeed;
-                    pellet.x += pellet.dx;
-                    pellet.y += pellet.dy;
+                    pellet.x -= pellet.dx;
+                    pellet.y -= pellet.dy;
 
                     // check if pellet is off screen and reset its position
                     if (pellet.x < 0 || pellet.x > canvas.width || pellet.y < 0 || pellet.y > canvas.height) {
